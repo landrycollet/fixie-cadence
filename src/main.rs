@@ -1,4 +1,3 @@
-//extern crate ini;
 use ini::Ini;
 use regex::Regex;
 use std::env;
@@ -38,7 +37,7 @@ fn main() {
     // Load input file.
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
-      panic!("Usage: cargo run <input_file>");
+      panic!("Usage: cargo run -- <input_file>");
     }
     let source_file_path = &args[1];
     if !is_tcx_file(source_file_path) { panic!("Not a valid file"); }
@@ -57,6 +56,7 @@ fn main() {
     println!("\nStarting file parsing and generation...");
     let mut trackpoint_cadence: Option<i32> = None;
     let mut cadence_already_set_in_trackpoint = false;
+
     // The regex that will be used to extract the cadence string.
     // The regex needs to be compiled outside the loop for efficiency.
     let float_regex = Regex::new(r"([0-9]*[.])[0-9]+").unwrap();
@@ -65,7 +65,7 @@ fn main() {
 
         if line.contains(":Speed")
         {
-            // println!("Found SPEED data: Line: {line}");
+            // println!("Found SPEED data: Line: {line}"); // Uncomment to troubleshoot.
             let speed_entry = String::from(&line);
             // Use the regex to extract the speed value.
             let speed_ms_str = float_regex.find(&speed_entry).unwrap().as_str();

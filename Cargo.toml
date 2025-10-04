@@ -1,10 +1,9 @@
 [package]
 name = "fixie_cadence"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 
 [dependencies]
 config = "0.15.18"
-fast-float = "0.2.0"
 regex = "1.11.3"
 rust-ini = "0.21"
